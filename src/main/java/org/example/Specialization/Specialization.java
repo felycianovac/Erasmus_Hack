@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.Category.Category;
 import org.example.Course.Course;
 import org.example.Offer.Offer;
 //import org.example.Offer.Offer;
@@ -25,6 +26,10 @@ public class Specialization {
 
     @Column(name = "specialization_name")
     private String specialization_name;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category category_id;
 
     @ManyToMany(mappedBy = "specializations")
     private List<Offer> offers;

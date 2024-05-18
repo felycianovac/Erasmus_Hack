@@ -25,14 +25,26 @@ public class Offer {
     @Column(name = "offer_name")
     private String offer_name;
 
-    @Column(name = "offer_duration")
+    @Transient
     private Integer offer_duration;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "start_date")
     private Date offer_start_date;
 
     @Column(name = "end_date")
     private Date offer_end_date;
+
+    @Column(name = "program_start")
+    private Date program_start;
+
+    @Column(name = "program_end")
+    private Date program_end;
+
+    @Column(name = "language")
+    private String language;
 
     @ManyToOne
     @JoinColumn(name = "receiver_id", referencedColumnName = "university_id")
@@ -49,7 +61,4 @@ public class Offer {
             inverseJoinColumns = @JoinColumn(name = "specialization_id")
     )
     private List<Specialization> specializations;
-
-
-
 }
