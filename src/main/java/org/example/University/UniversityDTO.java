@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+
 public class UniversityDTO {
     private Integer university_id;
     private String university_name;

@@ -1,5 +1,4 @@
 package org.example.City;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

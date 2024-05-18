@@ -46,6 +46,9 @@ public class Offer {
     @Column(name = "language")
     private String language;
 
+    @Column(name = "scholarship")
+    private Integer scholarship;
+
     @ManyToOne
     @JoinColumn(name = "receiver_id", referencedColumnName = "university_id")
     private University receiver_id;

@@ -12,6 +12,7 @@ import org.example.City.City;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "University")
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
