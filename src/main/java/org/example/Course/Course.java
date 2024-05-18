@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.Specialization.Specialization;
+
+import java.util.List;
 
 @Data //generate getters and setters
 @Builder //build object
@@ -26,4 +29,7 @@ public class Course {
 
     @Column(name = "course_semester")
     private Integer course_semester;
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Specialization> specializations;
 }
