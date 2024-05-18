@@ -5,11 +5,12 @@ import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
+import org.example.Category.Category;
 import org.example.Course.Course;
 import org.example.Offer.Offer;
 
 @StaticMetamodel(Specialization.class)
-@Generated("org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Specialization_ {
 
 	
@@ -34,6 +35,11 @@ public abstract class Specialization_ {
 	public static volatile SingularAttribute<Specialization, String> specialization_name;
 	
 	/**
+	 * @see org.example.Specialization.Specialization#category_id
+	 **/
+	public static volatile SingularAttribute<Specialization, Category> category_id;
+	
+	/**
 	 * @see org.example.Specialization.Specialization
 	 **/
 	public static volatile EntityType<Specialization> class_;
@@ -42,6 +48,7 @@ public abstract class Specialization_ {
 	public static final String COURSES = "courses";
 	public static final String SPECIALIZATION_ID = "specialization_id";
 	public static final String SPECIALIZATION_NAME = "specialization_name";
+	public static final String CATEGORY_ID = "category_id";
 
 }
 

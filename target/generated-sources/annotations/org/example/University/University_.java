@@ -4,10 +4,10 @@ import jakarta.annotation.Generated;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
-import org.example.Country.Country;
+import org.example.City.City;
 
 @StaticMetamodel(University.class)
-@Generated("org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class University_ {
 
 	
@@ -27,13 +27,13 @@ public abstract class University_ {
 	public static volatile EntityType<University> class_;
 	
 	/**
-	 * @see org.example.University.University#country_id
+	 * @see org.example.University.University#city_id
 	 **/
-	public static volatile SingularAttribute<University, Country> country_id;
+	public static volatile SingularAttribute<University, City> city_id;
 
 	public static final String UNIVERSITY_ID = "university_id";
 	public static final String UNIVERSITY_NAME = "university_name";
-	public static final String COUNTRY_ID = "country_id";
+	public static final String CITY_ID = "city_id";
 
 }
 

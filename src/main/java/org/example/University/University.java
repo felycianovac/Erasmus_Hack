@@ -5,13 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.Country.Country;
+import org.example.City.City;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "University")
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,6 @@ public class University {
     private String university_name;
 
     @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "country_id")
-    private Country country_id;
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id")
+    private City city_id;
 }

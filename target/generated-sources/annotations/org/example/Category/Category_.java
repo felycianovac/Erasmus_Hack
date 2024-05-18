@@ -6,7 +6,7 @@ import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 
 @StaticMetamodel(Category.class)
-@Generated("org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Category_ {
 
 	

@@ -8,7 +8,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import org.example.Specialization.Specialization;
 
 @StaticMetamodel(Course.class)
-@Generated("org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Course_ {
 
 	

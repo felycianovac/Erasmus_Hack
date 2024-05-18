@@ -7,7 +7,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import org.example.University.University;
 
 @StaticMetamodel(Faculty.class)
-@Generated("org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
+@Generated("org.hibernate.processor.HibernateProcessor")
 public abstract class Faculty_ {
 
 	
