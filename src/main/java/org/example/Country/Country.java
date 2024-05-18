@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Country {
     @Id
     @Column(name = "country_id")
-    private Integer country_id;
+    private String country_id;
 
     @Column(name = "country_name")
     private String country_name;

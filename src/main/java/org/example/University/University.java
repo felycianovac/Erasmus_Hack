@@ -14,6 +14,7 @@ import org.example.Country.Country;
 @Entity
 public class University {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "university_id")
     private Integer university_id;
 

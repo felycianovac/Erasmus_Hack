@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.University.University;
+import org.example.Specialization.Specialization;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,6 +18,7 @@ import java.util.Date;
 @Entity
 public class Offer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offer_id")
     private Integer offer_id;
 
@@ -32,11 +35,21 @@ public class Offer {
     private Date offer_end_date;
 
     @ManyToOne
-    @JoinColumn(name = "university_id", referencedColumnName = "university_id")
+    @JoinColumn(name = "receiver_id", referencedColumnName = "university_id")
     private University receiver_id;
 
     @OneToOne
-    @JoinColumn(name = "university_id", referencedColumnName = "university_id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "university_id")
     private University sender_id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Offer_Specialization",
+            joinColumns = @JoinColumn(name = "offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialization_id")
+    )
+    private List<Specialization> specializations;
+
+
 
 }
