@@ -23,9 +23,9 @@ public class SpecializationController {
         return ResponseEntity.ok(specializationDTOs);
     }
     @GetMapping("/{id}")
-    public SpecializationResponse getSpecializationById(@PathVariable("id") Integer mineSpecializationId,
-                                                        @RequestParam("specialization_id") Integer offerSpecializationId,
-                                                        @RequestParam("sem") Integer semester) {
+    public SpecializationResponse getSpecializationById(@PathVariable("id") Integer offerSpecializationId,
+                                                        @RequestParam(value = "specialization_id", required = false) Integer mineSpecializationId,
+                                                        @RequestParam(value = "sem", required = false) Integer semester) {
         return specializationService.getSpecializationDetails(mineSpecializationId, offerSpecializationId, semester);
     }
 }
