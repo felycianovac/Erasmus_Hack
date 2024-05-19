@@ -49,13 +49,13 @@ public class SpecializationService {
         List<CourseDTO> coveredCourses = availableCourses.stream()
                 .filter(availableCourse -> mineCourses.stream()
                         .anyMatch(mineCourse -> mineCourse.getCourse_name().equals(availableCourse.getCourse_name()) &&
-                                Math.abs(mineCourse.getCredits() - availableCourse.getCredits()) <= 2))
+                                (mineCourse.getCredits() - availableCourse.getCredits()) <= 2))
                 .collect(Collectors.toList());
 
         List<CourseDTO> notCoveredCourses = mineCourses.stream()
                 .filter(mineCourse -> availableCourses.stream()
                         .noneMatch(availableCourse -> availableCourse.getCourse_name().equals(mineCourse.getCourse_name()) &&
-                                Math.abs(mineCourse.getCredits() - availableCourse.getCredits()) <= 2))
+                                (mineCourse.getCredits() - availableCourse.getCredits()) <= 2))
                 .collect(Collectors.toList());
 
         return SpecializationResponse.builder()

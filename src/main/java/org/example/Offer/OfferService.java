@@ -80,7 +80,7 @@ public class OfferService {
             List<Predicate> predicates = new ArrayList<>();
 
             if (university != null) {
-                predicates.add(criteriaBuilder.equal(root.get("receiver_id"), university));
+                predicates.add(criteriaBuilder.equal(root.get("receiverId"), universityRepository.findById(university).get()));
             }
             if (speciality != null) {
                 predicates.add(criteriaBuilder.isMember(speciality, root.get("specializations")));
@@ -90,7 +90,7 @@ public class OfferService {
             }
             if (searchTerm != null && !searchTerm.isEmpty()) {
                 Predicate searchPredicate = criteriaBuilder.or(
-                        criteriaBuilder.like(root.get("offer_name"), "%" + searchTerm + "%"),
+                        criteriaBuilder.like(root.get("offerName"), "%" + searchTerm + "%"),
                         criteriaBuilder.like(root.get("description"), "%" + searchTerm + "%")
                 );
                 predicates.add(searchPredicate);
@@ -119,14 +119,20 @@ public class OfferService {
 
         List<Offer> filteredOffers = offerRepository.findAll(specification);
 
-        // Calculate duration and filter offers programmatically
+       if(duration != null){
         List<Offer> offersWithDuration = filteredOffers.stream()
                 .filter(offer -> calculateDuration(offer) != null && duration.contains(calculateDuration(offer)))
                 .toList();
+           return offersWithDuration.stream()
+                   .map(this::mapToDTO)
+                   .collect(Collectors.toList());
+        }
+    else{
+           return filteredOffers.stream()
+                   .map(this::mapToDTO)
+                   .collect(Collectors.toList());
+       }
 
-        return offersWithDuration.stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
     }
 
     private Integer calculateDuration(Offer offer) {
