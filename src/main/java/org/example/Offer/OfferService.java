@@ -180,4 +180,9 @@ public class OfferService {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return sdf.format(date);
     }
+
+    public Offer getOfferByIdRecommendation(Integer id) {
+        return offerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Offer not found with ID: " + id));
+    }
 }

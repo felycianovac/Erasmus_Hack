@@ -1,5 +1,8 @@
 package org.example.Offer;
 
+import org.example.Mail.EmailService;
+import org.example.Mail.EmailServiceImpl;
+import org.example.Mail.SubscriptionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +15,12 @@ import java.util.List;
 public class OfferController {
 
     private final OfferService offerService;
+    private final EmailService emailService;
 
     @Autowired
-    public OfferController(OfferService offerService) {
+    public OfferController(OfferService offerService, EmailService emailService) {
         this.offerService = offerService;
+        this.emailService = emailService;
     }
 
     @PostMapping()
@@ -52,4 +57,9 @@ public class OfferController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/subscribe")
+    public ResponseEntity<String> subscribeToOffer(@RequestBody SubscriptionRequest request) {
+        String response = emailService.sendMail(request);
+        return ResponseEntity.ok(response);}
 }
