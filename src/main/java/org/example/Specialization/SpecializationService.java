@@ -1,7 +1,10 @@
 package org.example.Specialization;
 
+<<<<<<< HEAD
 import org.example.Course.Course;
 import org.example.Course.CourseDTO;
+=======
+>>>>>>> origin/main
 import org.example.University.University;
 import org.example.University.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class SpecializationService {
+    @Autowired
+    private  SpecializationRepository specializationRepository;
+    @Autowired
+    private  UniversityRepository universityRepository;
 
     @Autowired
     private SpecializationRepository specializationRepository;
@@ -55,5 +62,15 @@ public class SpecializationService {
                 .course_name(course.getCourse_name())
                 .credits(course.getCourse_credits())
                 .build();
+    }
+    public List<SpecializationDTO> getSpecializationsByUniversityId(Integer university_id) {
+        University university = universityRepository.findById(university_id).get();
+        List<Specialization> specializations = specializationRepository.findSpecializationsByUniversityId(university);
+        return specializations.stream()
+                .map(specialization -> SpecializationDTO.builder()
+                        .specialization_id(specialization.getSpecialization_id())
+                        .specialization_name(specialization.getSpecialization_name())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
