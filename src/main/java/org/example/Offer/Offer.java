@@ -25,9 +25,6 @@ public class Offer {
     @Column(name = "offer_name")
     private String offer_name;
 
-    @Transient
-    private Integer offer_duration;
-
     @Column(name = "description")
     private String description;
 
