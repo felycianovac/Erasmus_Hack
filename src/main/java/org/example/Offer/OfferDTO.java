@@ -13,9 +13,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 public class OfferDTO {
-    private Integer id;
-    private Integer university_sender;
-    private Integer university_receiver;
+    private Integer sender_id;
+    private Integer receiver_id;
     private String offer_name;
     private String description;
     private Date offer_end_date;
@@ -23,5 +22,8 @@ public class OfferDTO {
     private Date program_start;
     private Date program_end;
     private Integer scholarship;
+    private String language;
     private List<SpecializationDTO> specializations;
+
+
 }

@@ -1,10 +1,7 @@
 package org.example.Specialization;
 
-<<<<<<< HEAD
 import org.example.Course.Course;
 import org.example.Course.CourseDTO;
-=======
->>>>>>> origin/main
 import org.example.University.University;
 import org.example.University.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +17,6 @@ public class SpecializationService {
     @Autowired
     private  UniversityRepository universityRepository;
 
-    @Autowired
-    private SpecializationRepository specializationRepository;
 
 
     public SpecializationResponse getSpecializationDetails(Integer mineSpecializationId, Integer offerSpecializationId, Integer semester) {
