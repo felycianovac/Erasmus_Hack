@@ -12,7 +12,7 @@ import jakarta.persistence.criteria.Predicate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -32,9 +32,9 @@ public class OfferService {
     }
 
     public Offer createOffer(OfferDTO offerDTO) {
-        University sender = universityRepository.findById(offerDTO.getUniversity_sender())
+        University sender = universityRepository.findById(offerDTO.getSender_id())
                 .orElseThrow(() -> new RuntimeException("Sender University not found"));
-        University receiver = universityRepository.findById(offerDTO.getUniversity_receiver())
+        University receiver = universityRepository.findById(offerDTO.getReceiver_id())
                 .orElseThrow(() -> new RuntimeException("Receiver University not found"));
 
         List<Specialization> specializations = offerDTO.getSpecializations().stream()
@@ -42,16 +42,25 @@ public class OfferService {
                         .orElseThrow(() -> new RuntimeException("Specialization not found")))
                 .collect(Collectors.toList());
 
+        // Check if an offer with the same name, sender, and receiver already exists
+        boolean offerExists = offerRepository.existsByOfferNameAndSenderIdAndReceiverId(
+                offerDTO.getOffer_name(), sender, receiver);
+
+        if (offerExists) {
+            throw new RuntimeException("Offer already exists");
+        }
+
         Offer offer = Offer.builder()
-                .offer_name(offerDTO.getOffer_name())
+                .offerName(offerDTO.getOffer_name())
                 .description(offerDTO.getDescription())
-                .offer_start_date(offerDTO.getOffer_start_date())
-                .offer_end_date(offerDTO.getOffer_end_date())
-                .program_start(offerDTO.getProgram_start())
-                .program_end(offerDTO.getProgram_end())
+                .offer_start_date(Date.valueOf(offerDTO.getOffer_start_date().toString()))
+                .offer_end_date(Date.valueOf(offerDTO.getOffer_end_date().toString()))
+                .program_start(Date.valueOf(offerDTO.getProgram_start().toString()))
+                .program_end(Date.valueOf(offerDTO.getProgram_end().toString()))
                 .scholarship(offerDTO.getScholarship())
-                .sender_id(sender)
-                .receiver_id(receiver)
+                .senderId(sender)
+                .receiverId(receiver)
+                .language(offerDTO.getLanguage())
                 .specializations(specializations)
                 .build();
 
@@ -133,7 +142,7 @@ public class OfferService {
     private OfferResponse mapToDTO(Offer offer) {
         OfferResponse offerResponse = OfferResponse.builder()
                 .id(offer.getOffer_id())
-                .offer_name(offer.getOffer_name())
+                .offer_name(offer.getOfferName())
                 .description(offer.getDescription())
                 .offer_end_date(formatDate(offer.getOffer_end_date()))
                 .offer_start_date(formatDate(offer.getOffer_start_date()))
@@ -141,10 +150,10 @@ public class OfferService {
                 .program_end(offer.getProgram_end())
                 .scholarship(offer.getScholarship())
                 .language(offer.getLanguage())
-                .receiver_name(offer.getReceiver_id().getUniversity_name())
-                .country_name(offer.getSender_id().getCity_id().getCountry_id().getCountry_name())
-                .city_name(offer.getSender_id().getCity_id().getCity_name())
-                .university_name(offer.getSender_id().getUniversity_name())
+                .receiver_name(offer.getReceiverId().getUniversity_name())
+                .country_name(offer.getSenderId().getCity_id().getCountry_id().getCountry_name())
+                .city_name(offer.getSenderId().getCity_id().getCity_name())
+                .university_name(offer.getSenderId().getUniversity_name())
                 .specializations(mapSpecializationsToDTO(offer.getSpecializations()))
                 .build();
 

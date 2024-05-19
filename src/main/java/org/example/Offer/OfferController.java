@@ -18,10 +18,14 @@ public class OfferController {
         this.offerService = offerService;
     }
 
-    @PostMapping
-    public ResponseEntity<Offer> createOffer(@RequestBody OfferDTO offerDTO) {
+    @PostMapping()
+    public ResponseEntity<String> createOffer(@RequestBody OfferDTO offerDTO) {
         Offer createdOffer = offerService.createOffer(offerDTO);
-        return ResponseEntity.ok(createdOffer);
+        return ResponseEntity.ok("ok");
+
+
+
+
     }
     @GetMapping
     public List<OfferResponse> getOffers(
