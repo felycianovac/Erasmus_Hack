@@ -18,7 +18,8 @@ public class SpecializationController {
     }
 
     @GetMapping("/{university_id}")
-    public ResponseEntity<List<Specialization>> getSpecializationsByUniversityId(@PathVariable("university_id") Integer universityId) {
-        return ResponseEntity.ok(specializationService.getSpecializationsByUniversityId(universityId));
+    public ResponseEntity<List<SpecializationDTO>> getSpecializationsByUniversityId(@PathVariable("university_id") Integer universityId) {
+        List<SpecializationDTO> specializationDTOs = specializationService.getSpecializationsByUniversityId(universityId);
+        return ResponseEntity.ok(specializationDTOs);
     }
 }

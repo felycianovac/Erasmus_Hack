@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SpecializationService {
@@ -18,8 +19,14 @@ public class SpecializationService {
         this.universityRepository = universityRepository;
     }
 
-    public List<Specialization> getSpecializationsByUniversityId(Integer university_id) {
+    public List<SpecializationDTO> getSpecializationsByUniversityId(Integer university_id) {
         University university = universityRepository.findById(university_id).get();
-        return specializationRepository.findSpecializationsByUniversityId(university);
+        List<Specialization> specializations = specializationRepository.findSpecializationsByUniversityId(university);
+        return specializations.stream()
+                .map(specialization -> SpecializationDTO.builder()
+                        .specialization_id(specialization.getSpecialization_id())
+                        .specialization_name(specialization.getSpecialization_name())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
