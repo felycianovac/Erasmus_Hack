@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.example.Category.Category;
 import org.example.Course.Course;
 import org.example.Offer.Offer;
+import org.example.University.University;
 //import org.example.Offer.Offer;
 
 import java.util.List;
@@ -26,6 +27,10 @@ public class Specialization {
 
     @Column(name = "specialization_name")
     private String specialization_name;
+
+    @ManyToOne
+    @JoinColumn(name = "university_id", referencedColumnName = "university_id")
+    private University universityId;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
